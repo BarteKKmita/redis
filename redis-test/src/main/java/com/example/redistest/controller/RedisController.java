@@ -1,5 +1,6 @@
 package com.example.redistest.controller;
 
+import com.example.redistest.configuration.StudentKey;
 import com.example.redistest.student.StudentEntity;
 import com.example.redistest.student.StudentRepository;
 import java.util.Optional;
@@ -28,14 +29,14 @@ public class RedisController {
   @GetMapping("/customer/{id}")
   public ResponseEntity<String> getCustomer(@PathVariable("id") String id) {
     log.info("Szukam ID {}", id);
-    Optional<StudentEntity> byId = repository.findById(id);
+    Optional<StudentEntity> byId = repository.findById(new StudentKey(id, "30"));
     return new ResponseEntity<>(byId.map(Object::toString).orElse("Nie ma mnie"), HttpStatus.OK);
   }
 
   @GetMapping("/intialize/{id}/{name}")
   public ResponseEntity<String> initialize(@PathVariable("id") String id,
                                            @PathVariable("name") String name) {
-    repository.save(new StudentEntity(id, name, 20L));
+    repository.save(new StudentEntity(new StudentKey(id,"30"), name, 20L));
     return new ResponseEntity<>("Utworzono", HttpStatus.OK);
   }
 

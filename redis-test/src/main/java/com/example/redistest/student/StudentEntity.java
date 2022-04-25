@@ -1,5 +1,6 @@
 package com.example.redistest.student;
 
+import com.example.redistest.configuration.StudentKey;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.data.redis.core.TimeToLive;
 @ToString
 public class StudentEntity {
 
-  private String id;
+  private StudentKey id;
   private String name;
   @TimeToLive
   private Long expiration;
